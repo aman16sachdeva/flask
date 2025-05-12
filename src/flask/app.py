@@ -1,4 +1,4 @@
-from __future__ import annotations
+ƒfrom __future__ import annotations
 
 import collections.abc as cabc
 import os
@@ -170,23 +170,35 @@ class Flask(App):
                                      for loading the config are assumed to
                                      be relative to the instance path instead
                                      of the application root.
-    def send_static_file(self, filename: str) -> Response:
-        """The view function used to serve files from
-        :attr:`static_folder`. A route is automatically registered for
-        this view at :attr:`static_url_path` if :attr:`static_folder` is
-        set.
+    :param root_path: The path to the root of the application files.
+        This should only be set manually when it can't be detected
+        automatically, such as for namespace packages.
+    """
 
-        Note this is a duplicate of the same method in the Flask
-        class.
-
-        .. versionadded:: 0.5
-
-        """
-        if not self.has_static_folder:
-            raise RuntimeError("'static_folder' must be set to serve static_files.")
-
-        # Use app's send_static_file method instead of send_from_directory
-        return current_app.send_static_file(filename)
+    default_config = ImmutableDict(
+        {
+            "DEBUG": None,
+            "TESTING": False,
+            "PROPAGATE_EXCEPTIONS": None,
+            "SECRET_KEY": None,
+            "SECRET_KEY_FALLBACKS": None,
+            "PERMANENT_SESSION_LIFETIME": timedelta(days=31),
+            "USE_X_SENDFILE": False,
+            "TRUSTED_HOSTS": None,
+            "SERVER_NAME": None,
+            "APPLICATION_ROOT": "/",
+            "SESSION_COOKIE_NAME": "session",
+            "SESSION_COOKIE_DOMAIN": None,
+            "SESSION_COOKIE_PATH": None,
+            "SESSION_COOKIE_HTTPONLY": True,
+            "SESSION_COOKIE_SECURE": False,
+            "SESSION_COOKIE_PARTITIONED": False,
+            "SESSION_COOKIE_SAMESITE": None,
+            "SESSION_REFRESH_EACH_REQUEST": True,
+            "MAX_CONTENT_LENGTH": None,
+            "MAX_FORM_MEMORY_SIZE": 500_000,
+            "MAX_FORM_PARTS": 1_000,
+            "SEND_FILE_MAX_AGE_DEFAULT": None,
             "TRAP_BAD_REQUEST_ERRORS": None,
             "TRAP_HTTP_EXCEPTIONS": False,
             "EXPLAIN_TEMPLATE_LOADING": False,
