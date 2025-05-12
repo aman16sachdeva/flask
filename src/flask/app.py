@@ -170,7 +170,7 @@ class Flask(App):
                                      for loading the config are assumed to
                                      be relative to the instance path instead
                                      of the application root.
-    :param root_path: The path to the root of the application files.
+            return self.send_static_file(filename)
         This should only be set manually when it can't be detected
         automatically, such as for namespace packages.
     """
